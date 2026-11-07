@@ -16,10 +16,19 @@ import org.junit.Test
 class HighlightPaletteTest {
 
     @Test
-    fun `one colour by default`() {
+    fun `the Readora five by default, orange held back`() {
         val palette = HighlightPalette()
 
-        assertEquals(listOf(HighlightTint.YELLOW), palette.shown)
+        assertEquals(
+            listOf(
+                HighlightTint.YELLOW,
+                HighlightTint.GREEN,
+                HighlightTint.BLUE,
+                HighlightTint.PINK,
+                HighlightTint.PURPLE,
+            ),
+            palette.shown,
+        )
     }
 
     @Test

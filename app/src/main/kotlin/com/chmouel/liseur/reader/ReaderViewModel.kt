@@ -85,6 +85,7 @@ import com.chmouel.liseur.domain.SeriesExtras
 import com.chmouel.liseur.domain.seriesIdForExtras
 import com.chmouel.liseur.domain.DictionaryUrl
 import com.chmouel.liseur.domain.exportNotebookMarkdown
+import com.chmouel.liseur.readora.anchor.AnchorMerge
 import com.chmouel.liseur.reader.annotations.SelectionActionLayout
 import com.chmouel.liseur.reader.annotations.HighlightPalette
 import com.chmouel.liseur.reader.annotations.HighlightTint
@@ -2655,45 +2656,69 @@ class ReaderViewModel(
         _selectionEvents.tryEmit(SelectionEvent.CLEARED)
     }
 
-    /** Marks a passage, or recolours a mark that is already there. */
+    /**
+     * Marks a passage, or recolours a mark that is already there.
+     *
+     * Readora S2: without an id from a tapped decoration, a fresh
+     * selection of a passage already marked adopts that mark instead of
+     * founding a second one. The adopted mark keeps its own locator —
+     * the record stays where the reader first made it; only the colour
+     * moves.
+     */
     fun highlight(locator: Locator, tint: HighlightTint, existingId: String? = null) {
-        val existing = existingId?.let { id -> annotations.value.firstOrNull { it.id == id } }
+        val tapped = existingId?.let { id -> annotations.value.firstOrNull { it.id == id } }
+        val merged = tapped ?: AnchorMerge.existingFor(locator, annotations.value)
+        if (merged != null) {
+            // Recolour only: the stored locator, passage, note and
+            // timestamps are the mark's own history and stay as they are.
+            save(merged.copy(tint = tint.name, updatedAt = System.currentTimeMillis() * 1000))
+            return
+        }
         save(
             annotation(locator, AnnotationKind.HIGHLIGHT).copy(
-                id = existing?.id ?: UUID.randomUUID().toString(),
-                note = existing?.note,
-                noteCreatedAt = existing?.noteCreatedAt,
-                noteUpdatedAt = existing?.noteUpdatedAt,
                 tint = tint.name,
-                createdAt = existing?.createdAt ?: System.currentTimeMillis(),
-                kind = existing?.kind ?: AnnotationKind.HIGHLIGHT.name,
             ),
         )
     }
 
-    /** Attaches the reader's own words to a passage. */
+    /**
+     * Attaches the reader's own words to a passage.
+     *
+     * Readora S2: as with [highlight], a fresh selection of a passage
+     * that already carries a mark adds the note to that mark rather
+     * than founding a twin. The mark keeps its own locator; only the
+     * note and its timestamps move.
+     */
     fun addNote(locator: Locator, note: String, existingId: String? = null) {
-        val existing = existingId?.let { id -> annotations.value.firstOrNull { it.id == id } }
-        val existingNote = existing?.note?.takeIf { it.isNotBlank() }
-        val now = System.currentTimeMillis()
-        val noteCreatedAt = when {
-            existing?.noteCreatedAt != null -> existing.noteCreatedAt
-            existingNote == null -> now
-            else -> existing.createdAt
-        }
-        val noteUpdatedAt = when {
-            existingNote == null -> null
-            existingNote == note -> existing.noteUpdatedAt
-            else -> now * 1000
+        val tapped = existingId?.let { id -> annotations.value.firstOrNull { it.id == id } }
+        val merged = tapped ?: AnchorMerge.existingFor(locator, annotations.value)
+        if (merged != null) {
+            // The mark keeps its own locator; only the note moves.
+            val existingNote = merged.note?.takeIf { it.isNotBlank() }
+            val now = System.currentTimeMillis()
+            val noteCreatedAt = when {
+                merged.noteCreatedAt != null -> merged.noteCreatedAt
+                existingNote == null -> now
+                else -> merged.createdAt
+            }
+            val noteUpdatedAt = when {
+                existingNote == null -> null
+                existingNote == note -> merged.noteUpdatedAt
+                else -> now * 1000
+            }
+            save(
+                merged.copy(
+                    note = note,
+                    noteCreatedAt = noteCreatedAt,
+                    noteUpdatedAt = noteUpdatedAt,
+                    updatedAt = System.currentTimeMillis() * 1000,
+                ),
+            )
+            return
         }
         save(
             annotation(locator, AnnotationKind.NOTE).copy(
-                id = existing?.id ?: UUID.randomUUID().toString(),
-                note = note,
-                noteCreatedAt = noteCreatedAt,
-                noteUpdatedAt = noteUpdatedAt,
-                tint = existing?.tint ?: highlightPalette.value.passageNoteTint.name,
-                createdAt = existing?.createdAt ?: now,
+                tint = highlightPalette.value.passageNoteTint.name,
             ),
         )
     }

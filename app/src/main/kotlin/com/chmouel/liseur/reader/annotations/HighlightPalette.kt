@@ -70,13 +70,22 @@ data class HighlightPalette(
         val MAX_COUNT = HighlightTint.entries.size
 
         /**
-         * One, which is what the bar offers until it is asked for more.
+         * The five Readora offers on a fresh install: yellow, green,
+         * blue, pink, purple. Orange stays a stored colour — a mark
+         * that arrives in it is drawn, listed and synced under its own
+         * name — but the bar does not offer it.
          *
-         * Most readers mark a passage without sorting it, and every chip
-         * is room taken from the actions beside it. A reader who sorts
-         * by colour ticks the others once.
+         * Readora S2: this default is read once, on the first run of a
+         * fresh install; a set the reader has stored keeps governing
+         * the bar, whatever it holds.
          */
-        val DEFAULT_OFFERED: Set<HighlightTint> = setOf(HighlightTint.YELLOW)
+        val DEFAULT_OFFERED: Set<HighlightTint> = setOf(
+            HighlightTint.YELLOW,
+            HighlightTint.GREEN,
+            HighlightTint.BLUE,
+            HighlightTint.PINK,
+            HighlightTint.PURPLE,
+        )
 
         /**
          * A palette read back from storage, made safe to use.

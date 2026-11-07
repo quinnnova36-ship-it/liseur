@@ -109,9 +109,11 @@ class BookActionLayoutTest {
         assertEquals(1, localManage.size)
         assertEquals(ManageBookSectionId.Device, localManage.single().id)
         assertEquals(
+            // Readora S1: Translation is offered only with a saved
+            // translation (see the test below), so a plain local book
+            // manages archive, removal and delete only.
             listOf(
                 BookAction.ToggleArchive,
-                BookAction.Translation,
                 BookAction.RemoveFromLibrary,
                 BookAction.DeleteFile,
             ),
@@ -124,9 +126,11 @@ class BookActionLayoutTest {
             serverManage.map { it.id },
         )
         assertEquals(
+            // Readora S1: no Translation entry without a saved one here
+            // either; a downloaded copy manages removal of the copy and
+            // the shelf entry.
             listOf(
                 BookAction.ToggleArchive,
-                BookAction.Translation,
                 BookAction.RemoveCopy,
                 BookAction.RemoveFromLibrary,
             ),
@@ -178,10 +182,13 @@ class BookActionLayoutTest {
     }
 
     @Test
-    fun `translation shows for a file on this device or a translation already made`() {
+    fun `translation shows only for a book that already has a translation`() {
+        // Readora S1: whole-book translation is out of the product, so a
+        // book on this device no longer offers it; only a book with a
+        // saved translation keeps its way in.
         assertFalse(BookAction.Translation in allManageActions(BookActionState(onServer = true)))
         assertTrue(BookAction.Translation in allManageActions(BookActionState(hasTranslation = true)))
-        assertTrue(BookAction.Translation in allManageActions(localOnly))
+        assertFalse(BookAction.Translation in allManageActions(localOnly))
         assertFalse(BookAction.Translation in allInitialActions(localOnly))
     }
 
