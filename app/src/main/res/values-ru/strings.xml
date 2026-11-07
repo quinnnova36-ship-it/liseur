@@ -77,6 +77,7 @@
     <string name="series_rename_reset">Использовать исходное имя</string>
     <string name="series_rename_taken">Так уже называется другая серия. Переименование одной в другую объединило бы их, а сервер этого не сделает.</string>
     <string name="series_rename_failed">Серию не удалось переименовать. Для этого нужен сервер библиотеки, и имя не сохраняется «на потом».</string>
+    <string name="library_book_not_readable">Файл не удалось прочитать как книгу, поэтому на полку ничего не добавлено.</string>
     <string name="series_clear_numbers">Сбросить свои номера томов</string>
     <string name="series_clear_numbers_warning">Книги снова получат номера от сервера и из файлов. Номера, которые вы ввели сами, тоже сбросятся, так как их нельзя отличить от переупорядочивания.</string>
     <string name="series_clear_numbers_confirm">Сбросить</string>

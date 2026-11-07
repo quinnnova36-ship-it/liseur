@@ -261,9 +261,18 @@ class LocalLibraryRepository(
             }
             return@withLock shelveAgainOrReport(book)
         }
-        indexBook(url, source = null)
+        // Readora: a picked book is copied into the app's own storage
+        // before it is indexed, so the shelf never depends on a grant
+        // the picker's provider may refuse to persist, or may take back
+        // later. A copy that cannot be indexed leaves no file behind.
+        val copied = copyIntoLibrary(uri) ?: return@withLock ImportResult.Failed
+        bookDao.getByUrl(copied.toString())?.let { return@withLock ImportResult.AlreadyShelved(it) }
+        indexBook(copied, source = null)
             ?.let { ImportResult.Added(it) }
-            ?: ImportResult.Failed
+            ?: run {
+                dropCopiedFile(copied)
+                ImportResult.Failed
+            }
     }
 
     /**

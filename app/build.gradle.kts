@@ -43,7 +43,7 @@ android {
     compileSdk = 37
 
     defaultConfig {
-        applicationId = "com.chmouel.liseur"
+        applicationId = "com.novaquinn.readora"
         minSdk = 26
         targetSdk = 37
         versionCode = 60

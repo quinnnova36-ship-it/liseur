@@ -525,7 +525,10 @@ private fun LiseurApp(
                             onDynamicColor = { scope.launch { repository.setDynamicColor(it) } },
                             appLanguage = remember { AppLocales.current(context) },
                             onAppLanguage = { language -> activity?.let { AppLocales.apply(it, language) } },
-                            onOpenAccount = { openPage(Route.ServerAccount) },
+                            showServerRow = false,
+                            // Readora S1: remote library servers are out of the
+                            // product for now; the route stays reachable for a
+                            // future revival, the door into it does not show.
                             onOpenReadingAppearance = { openPage(Route.ReadingAppearance) },
                             onOpenReadingNavigation = { openPage(Route.ReadingNavigation) },
                             onOpenWatchedFolders = { openPage(Route.WatchedFolders) },
@@ -536,17 +539,12 @@ private fun LiseurApp(
                             server = context.container.remoteAccount.server,
                             onOpenAbout = { openPage(Route.About) },
                             onBack = closeSettings,
-                            flavorReadingRows = {
-                                RowDivider()
-                                context.container.readAloud.SettingsEntry(onClick = { openPage(Route.ReadAloud) })
-                            },
-                            intelligenceRows = {
-                                context.container.translate.SettingsEntry(onClick = { openPage(Route.Translation) })
-                                RowDivider()
-                                CompanionSettingsEntry(context.container.companionServer, onClick = { openPage(Route.ReadingCompanion) })
-                                RowDivider()
-                                ServicesEntry(onClick = { openPage(Route.Services) })
-                            },
+                            // Readora S1: read aloud, translation, the reading
+                            // companion and their key screens are hidden for the
+                            // AI-coding-reader cut. The screens themselves stay;
+                            // S3 replaces them with the discussion drawer.
+                            showIntelligence = false,
+                            intelligenceRows = {},
                         )
                     }
 

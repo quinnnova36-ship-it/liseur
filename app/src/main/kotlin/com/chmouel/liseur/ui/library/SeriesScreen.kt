@@ -167,6 +167,7 @@ fun SeriesScreen(
     val seriesChanged = stringResource(R.string.series_reorder_changed)
     val nameTaken = stringResource(R.string.series_rename_taken)
     val renameFailed = stringResource(R.string.series_rename_failed)
+    val bookNotReadable = stringResource(R.string.library_book_not_readable)
     LaunchedEffect(notice) {
         val pending = notice ?: return@LaunchedEffect
         val message =
@@ -174,6 +175,7 @@ fun SeriesScreen(
                 NoticeKind.SeriesChangedWhileReordering -> seriesChanged
                 NoticeKind.SeriesNameTaken -> nameTaken
                 NoticeKind.SeriesRenameFailed -> renameFailed
+                NoticeKind.BookNotReadable -> bookNotReadable
             }
         snackbarHost.showSnackbar(message)
         onNoticeShown(pending.id)

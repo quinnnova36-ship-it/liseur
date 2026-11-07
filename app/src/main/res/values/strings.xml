@@ -1,7 +1,7 @@
 <resources>
     <string name="reader_sync_furthest_known">Furthest read</string>
     <string name="reader_sync_take_furthest">Go to furthest</string>
-    <string name="app_name" translatable="false">Liseur</string>
+    <string name="app_name" translatable="false">Readora</string>
 
     <string name="sort_recent">Recent</string>
     <string name="sort_title">Title</string>
@@ -9,7 +9,7 @@
     <string name="sort_added">Recently added</string>
     <string name="sort_normal">Reverse the order</string>
     <string name="sort_reversed">Back to the usual order</string>
-    <string name="library_title" translatable="false">Liseur</string>
+    <string name="library_title" translatable="false">Readora</string>
     <plurals name="library_book_count">
         <item quantity="one">%d book</item>
         <item quantity="other">%d books</item>
@@ -76,6 +76,7 @@
     <string name="series_rename_reset">Use the original name</string>
     <string name="series_rename_taken">Another series is already called that. Renaming one onto another would merge them, which your server will not do.</string>
     <string name="series_rename_failed">The series could not be renamed. It needs your library server, and a name is not saved to be sent later.</string>
+    <string name="library_book_not_readable">That file could not be read as a book, so nothing was added to the shelf.</string>
     <string name="series_clear_numbers">Clear the custom volume numbers</string>
     <string name="series_clear_numbers_warning">The books go back to the numbers your server and your files give them. Numbers you typed in yourself are cleared too, since they cannot be told apart from a reordering.</string>
     <string name="series_clear_numbers_confirm">Clear</string>

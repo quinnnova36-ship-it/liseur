@@ -189,6 +189,7 @@
     <string name="series_rename_reset">使用原名称</string>
     <string name="series_rename_taken">已有另一个系列使用该名称。将其中一个重命名为另一个会合并二者，而您的服务器不会这样做。</string>
     <string name="series_rename_failed">无法重命名该系列。此操作需要您的书库服务器，而且名称不会被保存以便稍后发送。</string>
+    <string name="library_book_not_readable">该文件无法作为图书读取，因此没有添加到书架。</string>
     <string name="series_clear_numbers">清除自定义卷号</string>
     <string name="series_clear_numbers_warning">图书将恢复为服务器和文件赋予它们的编号。您手动输入的编号也会被清除，因为它们无法与重新排序区分开。</string>
     <string name="series_clear_numbers_confirm">清除</string>

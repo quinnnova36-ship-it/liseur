@@ -72,6 +72,7 @@
     <string name="series_rename_reset">Ursprünglichen Namen verwenden</string>
     <string name="series_rename_taken">Eine andere Reihe heißt schon so. Eine Reihe auf eine andere umzubenennen würde sie zusammenführen, und das macht dein Server nicht.</string>
     <string name="series_rename_failed">Die Reihe konnte nicht umbenannt werden. Dafür brauchst du deinen Bibliotheksserver, und ein Name wird nicht gespeichert, um später gesendet zu werden.</string>
+    <string name="library_book_not_readable">Die Datei ließ sich nicht als Buch lesen, deshalb wurde nichts ins Regal gestellt.</string>
     <string name="series_clear_numbers">Eigene Bandnummern löschen</string>
     <string name="series_clear_numbers_warning">Die Bücher bekommen wieder die Nummern von Server und Dateien. Selbst eingetippte Nummern werden ebenfalls gelöscht, da sie sich von einer Neuordnung nicht unterscheiden lassen.</string>
     <string name="series_clear_numbers_confirm">Löschen</string>

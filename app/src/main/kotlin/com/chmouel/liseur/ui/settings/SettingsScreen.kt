@@ -79,7 +79,9 @@ fun SettingsScreen(
     onDynamicColor: (Boolean) -> Unit,
     appLanguage: AppLanguage = AppLanguage.SYSTEM,
     onAppLanguage: (AppLanguage) -> Unit = {},
-    onOpenAccount: () -> Unit,
+    onOpenAccount: () -> Unit = {},
+    showServerRow: Boolean = true,
+    showIntelligence: Boolean = true,
     onOpenReadingAppearance: () -> Unit,
     onOpenReadingNavigation: () -> Unit,
     onOpenWatchedFolders: () -> Unit = {},
@@ -261,26 +263,31 @@ fun SettingsScreen(
                     helpDescription = stringResource(R.string.settings_library_help_title),
                 ) {
                     val catalog by server.collectAsStateWithLifecycle(null)
-                    ConnectionRow(
-                        icon = { Icon(Icons.Outlined.CloudDownload, contentDescription = null) },
-                        title = stringResource(R.string.server_account),
-                        // Connected: say to what. Not connected: say what it
-                        // would do. A row that always reads as an invitation
-                        // makes a connected server look unconnected.
-                        subtitle = catalog?.let {
-                            val user = it.username?.takeIf { name -> name.isNotBlank() }
-                            if (user == null) {
-                                // An open catalog, or a connection that
-                                // only carries positions, has no name to
-                                // be signed in under.
-                                stringResource(R.string.server_connected_anon, it.baseUrl)
-                            } else {
-                                stringResource(R.string.server_connected, it.baseUrl, user)
-                            }
-                        } ?: stringResource(R.string.settings_account_detail),
-                        onClick = onOpenAccount,
-                    )
-                    RowDivider()
+                    // Readora S1: the book-server row is hidden while remote
+                    // libraries are out of the product; the connection state
+                    // stays so a revival needs no migration.
+                    if (showServerRow) {
+                        ConnectionRow(
+                            icon = { Icon(Icons.Outlined.CloudDownload, contentDescription = null) },
+                            title = stringResource(R.string.server_account),
+                            // Connected: say to what. Not connected: say what it
+                            // would do. A row that always reads as an invitation
+                            // makes a connected server look unconnected.
+                            subtitle = catalog?.let {
+                                val user = it.username?.takeIf { name -> name.isNotBlank() }
+                                if (user == null) {
+                                    // An open catalog, or a connection that
+                                    // only carries positions, has no name to
+                                    // be signed in under.
+                                    stringResource(R.string.server_connected_anon, it.baseUrl)
+                                } else {
+                                    stringResource(R.string.server_connected, it.baseUrl, user)
+                                }
+                            } ?: stringResource(R.string.settings_account_detail),
+                            onClick = onOpenAccount,
+                        )
+                        RowDivider()
+                    }
                     ConnectionRow(
                         icon = {
                             Icon(
@@ -329,8 +336,10 @@ fun SettingsScreen(
                     )
                 }
 
-                SettingsGroup(stringResource(R.string.settings_intelligence)) {
-                    intelligenceRows()
+                if (showIntelligence) {
+                    SettingsGroup(stringResource(R.string.settings_intelligence)) {
+                        intelligenceRows()
+                    }
                 }
 
                 SettingsGroup(stringResource(R.string.settings_about)) {

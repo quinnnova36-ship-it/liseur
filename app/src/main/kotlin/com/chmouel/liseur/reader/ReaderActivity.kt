@@ -497,10 +497,15 @@ class ReaderActivity : FragmentActivity() {
                                         }
                                     }
                                 }
-                                val companion = remember(s.publication) {
+                                // Readora S1: the reading companion (character
+                                // profiles, Story, recaps) is not part of this
+                                // product; passing null keeps its selection
+                                // action and peek bar out of the reader. S3
+                                // replaces it with the discussion drawer.
+                                val companion: ReaderCompanion? = null
+                                if (companion != null) {
                                     companionViewModel.attach(s.publication)
                                     codexViewModel.attach(s.publication)
-                                    readerCompanion()
                                 }
                                 LaunchedEffect(viewModel, companionViewModel) {
                                     viewModel.onPlaceShown = companionViewModel::shown

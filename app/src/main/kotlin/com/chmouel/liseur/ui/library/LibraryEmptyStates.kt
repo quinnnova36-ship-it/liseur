@@ -292,6 +292,9 @@ internal fun EmptyLibrary(
     onAddBook: () -> Unit,
     onAddFolder: () -> Unit,
     onConnectServer: () -> Unit,
+    // Readora S1: remote catalogs are out of the product; false keeps the
+    // connect card off the empty shelf.
+    showConnectServer: Boolean = true,
     modifier: Modifier = Modifier,
     offerFreeBooks: Boolean = false,
     onStartWithFreeBooks: () -> Unit = {},
@@ -335,13 +338,15 @@ internal fun EmptyLibrary(
             onClick = onAddBook,
             modifier = Modifier.entrance(delayMillis = 3 * ENTRANCE_STEP_MS),
         )
-        LibraryActionCard(
-            icon = Icons.Outlined.CloudQueue,
-            title = stringResource(R.string.connect_server),
-            hint = stringResource(R.string.connect_server_hint),
-            onClick = onConnectServer,
-            modifier = Modifier.entrance(delayMillis = 4 * ENTRANCE_STEP_MS),
-        )
+        if (showConnectServer) {
+            LibraryActionCard(
+                icon = Icons.Outlined.CloudQueue,
+                title = stringResource(R.string.connect_server),
+                hint = stringResource(R.string.connect_server_hint),
+                onClick = onConnectServer,
+                modifier = Modifier.entrance(delayMillis = 4 * ENTRANCE_STEP_MS),
+            )
+        }
         if (offerFreeBooks) {
             LibraryActionCard(
                 icon = Icons.Outlined.AutoStories,

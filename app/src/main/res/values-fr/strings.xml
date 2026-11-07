@@ -71,6 +71,7 @@
     <string name="series_rename_reset">Utiliser le nom d\'origine</string>
     <string name="series_rename_taken">Une autre série porte déjà ce nom. Renommer l\'une sur l\'autre les fusionnerait, ce que votre serveur ne fera pas.</string>
     <string name="series_rename_failed">La série n\'a pas pu être renommée. Il faut votre serveur de bibliothèque, et un nom n\'est pas enregistré pour être envoyé plus tard.</string>
+    <string name="library_book_not_readable">Ce fichier n\'a pas pu être lu comme un livre, donc rien n\'a été ajouté à la bibliothèque.</string>
     <string name="series_clear_numbers">Effacer les numéros de volume personnalisés</string>
     <string name="series_clear_numbers_warning">Les livres reprennent les numéros que votre serveur et vos fichiers leur donnent. Les numéros que vous avez saisis vous-même sont aussi effacés, car on ne peut pas les distinguer d\'une réorganisation.</string>
     <string name="series_clear_numbers_confirm">Effacer</string>

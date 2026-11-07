@@ -406,6 +406,7 @@ fun LibraryScreen(
     val seriesChanged = stringResource(R.string.series_reorder_changed)
     val nameTaken = stringResource(R.string.series_rename_taken)
     val renameFailed = stringResource(R.string.series_rename_failed)
+    val bookNotReadable = stringResource(R.string.library_book_not_readable)
     LaunchedEffect(notice) {
         val pending = notice ?: return@LaunchedEffect
         snackbarHost.showSnackbar(
@@ -413,6 +414,7 @@ fun LibraryScreen(
                 NoticeKind.SeriesChangedWhileReordering -> seriesChanged
                 NoticeKind.SeriesNameTaken -> nameTaken
                 NoticeKind.SeriesRenameFailed -> renameFailed
+                NoticeKind.BookNotReadable -> bookNotReadable
             },
         )
         onNoticeShown(pending.id)
@@ -869,10 +871,10 @@ fun LibraryScreen(
                         onAddBook = onAddBook,
                         onAddFolder = onAddFolder,
                         onConnectServer = onConnectServer,
-                        // One server at a time, so the offer is only
-                        // made where taking it up costs nothing: an
-                        // empty library with nothing connected.
-                        offerFreeBooks = !state.hasServer,
+                        showConnectServer = false,
+                        // Readora S1: remote catalogs are out of the product;
+                        // the free-books card is one, so neither shows.
+                        offerFreeBooks = false,
                         onStartWithFreeBooks = onStartWithFreeBooks,
                         modifier = fillAboveBar,
                     )

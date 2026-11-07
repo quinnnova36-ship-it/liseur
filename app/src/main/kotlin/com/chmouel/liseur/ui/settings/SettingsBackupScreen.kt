@@ -184,25 +184,8 @@ fun SettingsBackupScreen(
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                     }
-                    RowDivider()
-                    Row(
-                        Modifier
-                            .fillMaxWidth()
-                            .toggleable(
-                                value = includeConnections,
-                                enabled = !backup.busy,
-                                role = Role.Checkbox,
-                                onValueChange = { includeConnections = it },
-                            )
-                            .padding(horizontal = 16.dp, vertical = 12.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Checkbox(checked = includeConnections, onCheckedChange = null, enabled = !backup.busy)
-                        Text(
-                            stringResource(R.string.settings_backup_include_connections),
-                            Modifier.padding(start = 12.dp),
-                        )
-                    }
+                    // Readora: connections (accounts and API keys) are never
+                    // offered in a backup, per the product's key policy.
                     if (backup.hasTranslations) {
                         RowDivider()
                         Row(

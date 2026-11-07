@@ -119,6 +119,13 @@ enum class NoticeKind {
 
     /** The rename never reached the server, so the shelf is unchanged. */
     SeriesRenameFailed,
+
+    /**
+     * The picked file could not be read as a book at all, so nothing
+     * was shelved. Readora: the reader is told rather than dropped
+     * into a reader that cannot open it either.
+     */
+    BookNotReadable,
 }
 
 /**
@@ -1563,7 +1570,7 @@ class LibraryViewModel(
                 // and failing to shelve a book is no reason to refuse to
                 // show it.
                 ImportResult.Failed -> {
-                    _openImported.value = ImportedOpen(uri.toString(), null)
+                    notices.raise(NoticeKind.BookNotReadable)
                 }
             }
         }

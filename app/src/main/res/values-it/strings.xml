@@ -71,6 +71,7 @@
     <string name="series_rename_reset">Usa il nome originale</string>
     <string name="series_rename_taken">Un\'altra serie si chiama già così. Rinominarne una sull\'altra le unirebbe, e il server non lo fa.</string>
     <string name="series_rename_failed">Non è stato possibile rinominare la serie. Serve il server della libreria, e un nome non viene salvato per essere inviato dopo.</string>
+    <string name="library_book_not_readable">Quel file non si è potuto leggere come libro, quindi non è stato aggiunto nulla alla libreria.</string>
     <string name="series_clear_numbers">Cancella i numeri di volume personalizzati</string>
     <string name="series_clear_numbers_warning">I libri tornano ai numeri che danno il server e i file. Anche i numeri che hai digitato tu vengono cancellati, perché non si distinguono da un riordino.</string>
     <string name="series_clear_numbers_confirm">Cancella</string>
