@@ -59,25 +59,31 @@ object AnchorMerge {
         if (locator.href.toString() != href) return false
         val markPassage = locator.text.highlight?.takeIf { it.isNotBlank() } ?: return false
         if (markPassage != passage) return false
-        return flanksAgree(before, locator.text.before.orEmpty()) &&
-            flanksAgree(after, locator.text.after.orEmpty())
+        return flanksAgree(before, locator.text.before.orEmpty(), fromHead = false) &&
+            flanksAgree(after, locator.text.after.orEmpty(), fromHead = true)
     }
 
     /**
-     * True when the shorter flank is long enough to be evidence and the
-     * two agree on all of it. A flank shorter than [FLANK] still counts
-     * when it is all the room the book gives: at the very top of a file
-     * there is nothing before the first passage, and that is a place,
-     * not a coincidence.
+     * True when the flank agrees at the edge nearest the passage.
+     *
+     * Before-flanks compare at their tail and after-flanks at their
+     * head, because two snapshots of the same place differ only in how
+     * far the far end reaches. The far end is never compared: distant
+     * boilerplate that repeats (a refrain, a textbook's section
+     * framing) would otherwise merge two marks whose neighbouring text
+     * differs.
+     *
+     * A flank shorter than [FLANK] still counts when it is all the room
+     * the book gives: at the very top of a file there is nothing before
+     * the first passage, and that is a place, not a coincidence. Both
+     * sides must then be the same length, so a prefix match cannot
+     * stretch across a missing run of text.
      */
-    private fun flanksAgree(a: String, b: String): Boolean {
+    private fun flanksAgree(a: String, b: String, fromHead: Boolean): Boolean {
         val shorter = minOf(a.length, b.length)
         if (a.length < FLANK || b.length < FLANK) {
-            // One side simply ends (start/end of file): the overlap that
-            // exists is all the evidence there is, and both sides must
-            // end in the same place for it to count.
             return a.take(shorter) == b.take(shorter) && a.length == b.length
         }
-        return a.takeLast(FLANK) == b.takeLast(FLANK) || a.take(FLANK) == b.take(FLANK)
+        return if (fromHead) a.take(FLANK) == b.take(FLANK) else a.takeLast(FLANK) == b.takeLast(FLANK)
     }
 }

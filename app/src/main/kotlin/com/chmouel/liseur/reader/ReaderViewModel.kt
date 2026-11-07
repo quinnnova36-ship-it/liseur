@@ -2716,9 +2716,12 @@ class ReaderViewModel(
             )
             return
         }
+        val now = System.currentTimeMillis()
         save(
             annotation(locator, AnnotationKind.NOTE).copy(
                 tint = highlightPalette.value.passageNoteTint.name,
+                note = note,
+                noteCreatedAt = now,
             ),
         )
     }

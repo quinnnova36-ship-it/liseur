@@ -187,6 +187,34 @@ class AnchorMergeTest {
     }
 
     @Test
+    fun `repeated distant framing text does not merge marks with different neighbours`() {
+        // Both flanks are long (>= 16), the far ends are identical
+        // boilerplate, but the text next to the passage differs: a
+        // refrain or a textbook's repeated section framing must not
+        // make two places one.
+        val longShared = "每一章开头都有完全相同的两行长篇引言文字作为框架"
+        val existing = mark(
+            "mark-1",
+            locator(
+                highlight = "本节的核心论述只有一次出现",
+                before = longShared + "第一处紧邻上文的独特过渡语句。",
+                after = "第一处紧邻下文的独特收束语句。" + longShared,
+            ),
+        )
+
+        val elsewhere = AnchorMerge.existingFor(
+            locator(
+                highlight = "本节的核心论述只有一次出现",
+                before = longShared + "第二处不同的过渡语句紧邻上文。",
+                after = "第二处不同的收束语句紧邻下文。" + longShared,
+            ),
+            listOf(existing),
+        )
+
+        assertNull(elsewhere)
+    }
+
+    @Test
     fun `bookmarks and book notes are not anchors to merge with`() {
         val bookmark = mark(
             "bm",
