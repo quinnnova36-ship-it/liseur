@@ -1490,7 +1490,6 @@
     <string name="companion_settings_story_auto">Completa la storia da sola</string>
     <string name="companion_settings_story_auto_summary">Quando il Compagno si apre su Storia, riepiloga il capitolo prima della tua posizione se manca e tiene aggiornato il riassunto della storia finora. Si attiva con Consenti nella scheda Storia.</string>
     <string name="companion_settings_privacy">Il testo del libro prima del paragrafo selezionato viene inviato al server scelto, e capitoli interi se i riassunti in background sono attivi. Il suo fornitore può addebitare queste richieste.</string>
-    <string name="settings_backup_include_connections">Includi account, servizi e password</string>
     <string name="settings_backup_connections_replace">Gli account della biblioteca e di KOReader, le impostazioni dei servizi e le credenziali salvate saranno sostituiti automaticamente.</string>
     <string name="settings_backup_liseur_sync_exported_notice">Questo backup contiene un account %1$s. Associalo di nuovo dopo il ripristino.</string>
     <string name="settings_backup_liseur_sync_restored_notice">Associa di nuovo l’account %1$s per riprendere la sincronizzazione.</string>

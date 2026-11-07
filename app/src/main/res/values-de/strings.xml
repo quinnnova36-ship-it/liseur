@@ -1502,7 +1502,6 @@
     <string name="companion_settings_story_auto">Handlung selbstständig ergänzen</string>
     <string name="companion_settings_story_auto_summary">Wenn der Lesebegleiter mit Handlung öffnet, wird das Kapitel vor deiner Position zusammengefasst, falls es noch keine Zusammenfassung hat, und der Überblick über die bisherige Handlung aktuell gehalten. Wird mit Erlauben im Tab Handlung eingeschaltet.</string>
     <string name="companion_settings_privacy">Text aus dem Buch vor dem ausgewählten Absatz wird an den gewählten Server gesendet, bei aktivierten Hintergrund-Zusammenfassungen ganze Kapitel. Der Anbieter kann diese Anfragen berechnen.</string>
-    <string name="settings_backup_include_connections">Konten, Dienste und Passwörter einschließen</string>
     <string name="settings_backup_connections_replace">Gespeicherte Bibliotheks- und KOReader-Konten, Diensteinstellungen und Zugangsdaten werden automatisch ersetzt.</string>
     <string name="settings_backup_liseur_sync_exported_notice">Dieses Backup enthält ein %1$s-Konto. Kopple es nach der Wiederherstellung erneut.</string>
     <string name="settings_backup_liseur_sync_restored_notice">Kopple das %1$s-Konto erneut, um die Synchronisierung fortzusetzen.</string>

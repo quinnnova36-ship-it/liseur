@@ -7,7 +7,7 @@
         android:shortcutLongLabel="@string/continue_reading">
         <intent
             android:action="com.chmouel.liseur.action.CONTINUE_READING"
-            android:targetPackage="com.chmouel.liseur"
+            android:targetPackage="com.novaquinn.readora"
             android:targetClass="com.chmouel.liseur.MainActivity" />
     </shortcut>
     <shortcut
@@ -16,7 +16,7 @@
         android:shortcutShortLabel="@string/shortcut_library">
         <intent
             android:action="com.chmouel.liseur.action.LIBRARY"
-            android:targetPackage="com.chmouel.liseur"
+            android:targetPackage="com.novaquinn.readora"
             android:targetClass="com.chmouel.liseur.MainActivity" />
     </shortcut>
     <shortcut
@@ -26,7 +26,7 @@
         android:shortcutLongLabel="@string/reading_stats">
         <intent
             android:action="com.chmouel.liseur.action.READING_STATISTICS"
-            android:targetPackage="com.chmouel.liseur"
+            android:targetPackage="com.novaquinn.readora"
             android:targetClass="com.chmouel.liseur.MainActivity" />
     </shortcut>
 </shortcuts>

@@ -92,7 +92,10 @@ internal fun bookActionLayout(state: BookActionState): BookActionLayout {
     val deviceActions =
         listOfNotNull(
             BookAction.ToggleArchive,
-            BookAction.Translation.takeIf { state.inLibrary || state.hasTranslation },
+            // Readora S1: whole-book translation is out of the product;
+            // only a book that already has a saved translation can still
+            // reach its screen, so no new ones are offered.
+            BookAction.Translation.takeIf { state.hasTranslation },
             // BookDownloadWorker marks the book downloaded before indexing finishes, so hide
             // remove-copy while downloading is still active
             BookAction.RemoveCopy.takeIf { state.downloadedCopy && !state.downloading },

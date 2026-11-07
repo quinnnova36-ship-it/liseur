@@ -61,7 +61,8 @@ fun SettingsBackupScreen(
 ) {
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
 
-    var includeConnections by remember { mutableStateOf(false) }
+    // Readora: connections (accounts and API keys) are never part of a
+    // backup, so no include flag exists and the export needs no password.
     var includeTranslations by remember { mutableStateOf(true) }
     var passwordMode by remember { mutableStateOf<String?>(null) }
     // A wrong password shows only for an attempt made since the restore dialog opened.
@@ -218,7 +219,7 @@ fun SettingsBackupScreen(
                         subtitle = stringResource(R.string.settings_backup_export_detail),
                         enabled = !backup.busy,
                         onClick = {
-                            if (includeConnections) passwordMode = "export" else backup.export(null, includeTranslations)
+                            backup.export(null, includeTranslations)
                         },
                     )
                     RowDivider()

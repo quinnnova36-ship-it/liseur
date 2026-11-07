@@ -647,36 +647,9 @@ fun LibraryScreen(
                                         onAddBook()
                                     },
                                 )
-                                // Below the line because it is a
-                                // different kind of thing: the two above
-                                // bring books off this device, this one
-                                // hands over a whole catalog.
-                                HorizontalDivider()
-                                DropdownMenuItem(
-                                    text = {
-                                        Text(stringResource(R.string.connect_server_short))
-                                    },
-                                    leadingIcon = {
-                                        Icon(
-                                            Icons.Outlined.CloudQueue,
-                                            contentDescription = null,
-                                        )
-                                    },
-                                    onClick = {
-                                        addMenuOpen = false
-                                        onConnectServer()
-                                    },
-                                )
-                                DropdownMenuItem(
-                                    text = { Text(stringResource(R.string.browse_libraries)) },
-                                    leadingIcon = {
-                                        Icon(Icons.Outlined.CloudDownload, contentDescription = null)
-                                    },
-                                    onClick = {
-                                        addMenuOpen = false
-                                        onBrowseLibraries()
-                                    },
-                                )
+                                // Readora S1: remote catalogs are out of the
+                                // product; the connect and browse entries that
+                                // used to sit here are gone with them.
                             }
                         }
                         // A menu rather than more icons. The bar is

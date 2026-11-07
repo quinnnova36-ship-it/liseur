@@ -1590,7 +1590,6 @@
     <string name="companion_settings_story_auto">Дополнять сюжет самостоятельно</string>
     <string name="companion_settings_story_auto_summary">Когда Помощник открывается на вкладке «Сюжет», пересказывает главу перед вашим местом, если у неё нет пересказа, и поддерживает краткое содержание сюжета в актуальном состоянии. Включается кнопкой «Разрешить» на вкладке «Сюжет».</string>
     <string name="companion_settings_privacy">Текст книги до выделенного абзаца отправляется на выбранный сервер, а при включённых фоновых пересказах — целые главы. Его поставщик может брать плату за эти запросы.</string>
-    <string name="settings_backup_include_connections">Включить аккаунты, сервисы и пароли</string>
     <string name="settings_backup_connections_replace">Сохранённые аккаунты библиотеки и KOReader, настройки сервисов и учётные данные будут автоматически заменены.</string>
     <string name="settings_backup_liseur_sync_exported_notice">Эта резервная копия содержит аккаунт %1$s. После восстановления настройте сопряжение заново.</string>
     <string name="settings_backup_liseur_sync_restored_notice">Повторно настройте сопряжение с аккаунтом %1$s, чтобы возобновить синхронизацию.</string>

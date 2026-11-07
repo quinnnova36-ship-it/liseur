@@ -499,19 +499,10 @@ class ReaderActivity : FragmentActivity() {
                                 }
                                 // Readora S1: the reading companion (character
                                 // profiles, Story, recaps) is not part of this
-                                // product; passing null keeps its selection
-                                // action and peek bar out of the reader. S3
-                                // replaces it with the discussion drawer.
-                                val companion: ReaderCompanion? = null
-                                if (companion != null) {
-                                    companionViewModel.attach(s.publication)
-                                    codexViewModel.attach(s.publication)
-                                }
-                                LaunchedEffect(viewModel, companionViewModel) {
-                                    viewModel.onPlaceShown = companionViewModel::shown
-                                    viewModel.peek.map { it?.origin }.distinctUntilChanged()
-                                        .collect(companionViewModel::peeking)
-                                }
+                                // product; nothing is attached, so its view
+                                // models are left idle and the place/peek
+                                // plumbing below stays unwired. S3 replaces
+                                // it with the discussion drawer.
                                 ReaderScreen(
                                     publication = s.publication,
                                     displayAuthors = s.displayAuthors,
@@ -713,7 +704,8 @@ class ReaderActivity : FragmentActivity() {
                                                 .distinctUntilChanged(),
                                         )
                                     },
-                                    companion = companion,
+                                    // Readora S1: no reading companion (see the
+                                    // note above); the default null applies.
                                 )
                             }
                         }

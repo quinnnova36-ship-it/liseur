@@ -1441,7 +1441,6 @@
     <string name="companion_settings_story_auto">自动补全前情</string>
     <string name="companion_settings_story_auto_summary">在阅读伴侣中打开“前情”时，如果当前位置之前那一章还没有回顾，就自动回顾它，并让前情摘要保持最新。在“前情”标签页中点按“允许”即可开启。</string>
     <string name="companion_settings_privacy">所选段落之前的书籍文本会发送到所选服务器；开启后台摘要后会发送整章内容。服务提供方可能对这些请求收费。</string>
-    <string name="settings_backup_include_connections">包含账号、服务和密码</string>
     <string name="settings_backup_connections_replace">已保存的书库和 KOReader 账号、服务设置及凭据将被自动替换。</string>
     <string name="settings_backup_liseur_sync_exported_notice">此备份包含一个 %1$s 账号。恢复后请重新配对。</string>
     <string name="settings_backup_liseur_sync_restored_notice">请重新配对 %1$s 账号以恢复同步。</string>

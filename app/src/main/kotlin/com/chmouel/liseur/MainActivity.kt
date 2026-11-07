@@ -1184,13 +1184,9 @@ private fun LibraryRoute(
     LibraryScreen(
         state = state,
         onOpenTranslationSettings = onOpenTranslation,
-        onSetUpTranslation = { settingUpTranslation = true }.takeIf {
-            com.chmouel.liseur.translate.shouldOfferTranslationSetup(
-                translate.offersSetup,
-                translationChosen,
-                translateReady,
-            )
-        },
+        // Readora S1: the More-menu translation entry is gone with the
+        // Intelligence group; the callback stays null so nothing renders.
+        onSetUpTranslation = null,
         onAddBook = { openBook.launch(arrayOf("application/epub+zip")) },
         onAddFolder = { addFolder.launch(null) },
         onBookSelected = { book ->

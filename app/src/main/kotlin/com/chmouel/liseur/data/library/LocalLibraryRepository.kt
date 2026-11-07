@@ -422,7 +422,13 @@ class LocalLibraryRepository(
         // twice lands on the same path, so the second time finds the row
         // the first one made instead of shelving the book again.
         bookDao.getByUrl(copied.toString())?.let { return@withLock it }
-        indexBook(copied, source = null)
+        // Readora: a copy that will not open leaves nothing behind, the
+        // same rule as a picked book; the caller still shows what it was
+        // handed either way.
+        indexBook(copied, source = null) ?: run {
+            dropCopiedFile(copied)
+            null
+        }
     }
 
     /**

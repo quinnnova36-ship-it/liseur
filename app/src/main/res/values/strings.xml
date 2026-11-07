@@ -1550,7 +1550,6 @@
     <string name="companion_settings_story_auto">Fill in the story on its own</string>
     <string name="companion_settings_story_auto_summary">When Companion opens on Story, recap the chapter before your place if it has none, and keep the summary of the story so far up to date. Turned on by Allow in the Story tab.</string>
     <string name="companion_settings_privacy">Book text before your selected paragraph is sent to the chosen server, and whole chapters once background recaps are on. Its provider may charge for these requests.</string>
-    <string name="settings_backup_include_connections">Include accounts, services and passwords</string>
     <string name="settings_backup_connections_replace">Saved library and KOReader accounts, service settings and credentials will be replaced automatically.</string>
     <string name="settings_backup_liseur_sync_exported_notice">This backup contains a %1$s account. Pair it again after restoring.</string>
     <string name="settings_backup_liseur_sync_restored_notice">Pair the %1$s account again to resume syncing.</string>
