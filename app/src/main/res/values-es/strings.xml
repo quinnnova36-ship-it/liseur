@@ -14,6 +14,9 @@
     <string name="add_book">Añadir un libro</string>
     <string name="add_folder">Añadir una carpeta</string>
     <string name="add_books">Añadir libros</string>
+    <string name="readora_models_title">Modelos de discusión</string>
+    <string name="readora_models_detail">Comenta un pasaje con tu propio servicio compatible con OpenAI</string>
+    <string name="discussion_action">Comentar este pasaje</string>
     <string name="add_folder_hint">Elige una carpeta de EPUBs. Liseur añade los libros nuevos que aparezcan en ella.</string>
     <string name="library_folders">Carpetas vigiladas</string>
     <string name="library_folders_empty">No se está vigilando ninguna carpeta.</string>

@@ -1,6 +1,7 @@
 package com.chmouel.liseur.reader.annotations
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class SelectionActionLayoutTest {
@@ -35,7 +36,14 @@ class SelectionActionLayoutTest {
             .withWebsite(firstSite, "Mine", "https://example.org/?q={text}", SelectionActionIcon.HEART)
             .moveTo(firstSite, 0, toHidden = true)
         val reset = layout.reset()
-        assertEquals(SelectionActionLayout.default.entries, reset.entries.filter { it.action != null })
+        // Readora: COMPANION defaults to hidden, so reset places it in
+        // the hidden zone after the sites rather than in declaration
+        // order; compare as sets and pin the zone.
+        assertEquals(
+            SelectionActionLayout.default.entries.map { it.action }.toSet(),
+            reset.entries.filter { it.action != null }.map { it.action }.toSet(),
+        )
+        assertEquals(SelectionActionStyle.HIDDEN, reset.entries.first { it.action == SelectionAction.COMPANION }.style)
         val site = reset.shown.last()
         assertEquals(firstSite, site.id)
         assertEquals("Mine", site.customLabel)
@@ -127,8 +135,14 @@ class SelectionActionLayoutTest {
         val actions = layout.entries.map { it.action }
         assertEquals(listOf(SelectionAction.SHARE, SelectionAction.SEARCH, SelectionAction.NOTE),
             actions.filter { it in setOf(SelectionAction.SHARE, SelectionAction.SEARCH, SelectionAction.NOTE) })
-        assertEquals(actions.indexOf(SelectionAction.SEARCH) - 1, actions.indexOf(SelectionAction.COMPANION))
-        assertEquals(actions.indexOf(SelectionAction.COMPANION) - 1, actions.indexOf(SelectionAction.LOOK_UP))
+        // Readora: a saved layout gains every missing built-in before
+        // its first default successor; LOOK_UP, DISCUSS and COMPANION
+        // all precede SEARCH once inserted.
+        assertTrue(actions.indexOf(SelectionAction.LOOK_UP) < actions.indexOf(SelectionAction.SEARCH))
+        assertTrue(actions.indexOf(SelectionAction.DISCUSS) < actions.indexOf(SelectionAction.SEARCH))
+        // Readora: COMPANION defaults to hidden, so a layout that never
+        // named it puts it in the hidden zone after the toolbar.
+        assertTrue(actions.indexOf(SelectionAction.SEARCH) < actions.indexOf(SelectionAction.COMPANION))
     }
 
     @Test fun `saved layouts keep toolbar order and put hidden actions after it`() {

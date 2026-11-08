@@ -14,6 +14,9 @@
     <string name="add_book">Buch hinzufügen</string>
     <string name="add_folder">Ordner hinzufügen</string>
     <string name="add_books">Bücher hinzufügen</string>
+    <string name="readora_models_title">Diskussionsmodelle</string>
+    <string name="readora_models_detail">Eine Stelle mit deinem eigenen OpenAI-kompatiblen Dienst besprechen</string>
+    <string name="discussion_action">Diese Stelle besprechen</string>
     <string name="add_folder_hint">Wähle einen Ordner mit EPUBs. Liseur fügt neue Bücher hinzu, die darin auftauchen.</string>
     <string name="library_folders">Überwachte Ordner</string>
     <string name="library_folders_empty">Es werden keine Ordner überwacht.</string>

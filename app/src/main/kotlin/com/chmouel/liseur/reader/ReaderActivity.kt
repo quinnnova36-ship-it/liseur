@@ -706,6 +706,8 @@ class ReaderActivity : FragmentActivity() {
                                     },
                                     // Readora S1: no reading companion (see the
                                     // note above); the default null applies.
+                                    // Readora S3: the discussion action is on.
+                                    discussBookId = checkNotNull(target).id,
                                 )
                             }
                         }

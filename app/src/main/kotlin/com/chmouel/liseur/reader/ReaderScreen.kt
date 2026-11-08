@@ -137,6 +137,7 @@ import androidx.core.content.ContextCompat
 import org.readium.r2.shared.util.Url
 import org.readium.r2.shared.util.use
 import androidx.compose.foundation.layout.statusBars
+import com.chmouel.liseur.readora.discussion.DiscussionHost
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.IntOffset
 import com.chmouel.liseur.R
@@ -556,6 +557,8 @@ internal fun ReaderScreen(
     wholeBook: ReaderWholeBook? = null,
     // Who a selected name is, from the chapters before; null leaves the action out.
     companion: ReaderCompanion? = null,
+    // Readora S3: the book's library id; non-null enables the discussion action.
+    discussBookId: String? = null,
 ) {
     var navigator by remember { mutableStateOf<EpubNavigatorFragment?>(null) }
     val navigatorNow by rememberUpdatedState(navigator)
@@ -821,6 +824,8 @@ internal fun ReaderScreen(
     var tappedAt by remember { mutableStateOf(0L) }
     val annotationsNow by rememberUpdatedState(annotations)
     var noteFor by remember { mutableStateOf<ActiveSelection?>(null) }
+    // Readora S3: the passage the discussion sheet is anchored to.
+    var discussFor by remember { mutableStateOf<ActiveSelection?>(null) }
     var bookNoteEditor by remember { mutableStateOf<BookNoteEditor?>(null) }
     var defineWord by remember { mutableStateOf<DefinitionQuery?>(null) }
     var translatePassage by remember { mutableStateOf<ActiveSelection?>(null) }
@@ -5101,6 +5106,17 @@ internal fun ReaderScreen(
                     dismissSelection()
                 }
             },
+            // Readora S3: open the discussion sheet anchored to the
+            // passage just selected; the sheet keeps the selection's
+            // locator and text.
+            onDiscuss = discussBookId?.let {
+                {
+                    act { live ->
+                        discussFor = live
+                        dismissSelection()
+                    }
+                }
+            },
             onTranslate = if (translate.isAvailable && translateReady && !pageTranslated) {
                 {
                     act { live ->
@@ -5430,6 +5446,22 @@ internal fun ReaderScreen(
             },
             onDismiss = { noteFor = null },
         )
+    }
+
+
+    // Readora S3: the discussion sheet over the page. It finds or
+    // founds the thread for the anchor the selection stands for.
+    discussBookId?.let { bookId ->
+        discussFor?.let { active ->
+            DiscussionHost(
+                active = active,
+                bookId = bookId,
+                bookTitle = publication.metadata.title.orEmpty(),
+                annotations = annotations,
+                onAnnotationAction = onAnnotationAction,
+                onDismiss = { discussFor = null },
+            )
+        }
     }
 
     bookNoteEditor?.let { editor ->

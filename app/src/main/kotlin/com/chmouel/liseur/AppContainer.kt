@@ -165,6 +165,29 @@ class AppContainer(
         }
     }
 
+    /**
+     * Readora S3: the marked-passage discussion store. One instance for
+     * the app; keys live beside it, sealed by the same Keystore cipher
+     * as the app's other credentials.
+     */
+    val discussions by lazy {
+        com.chmouel.liseur.readora.discussion.DiscussionRepository(
+            threads = database.discussionThreadDao(),
+            messages = database.discussionMessageDao(),
+            configs = database.modelConfigDao(),
+            keys = com.chmouel.liseur.readora.discussion.ConfigKeyStore(
+                dir = context.noBackupFilesDir,
+                seal = { plaintext ->
+                    com.chmouel.liseur.data.security.SecretCipher("readora.model.key").encrypt(plaintext)
+                },
+                unseal = { sealed ->
+                    com.chmouel.liseur.data.security.SecretCipher("readora.model.key").decrypt(sealed)
+                },
+            ),
+            gateway = com.chmouel.liseur.readora.discussion.AiModelGateway(),
+        )
+    }
+
     val readingSessions =
         ReadingSessionManager(
             dao = database.readingSessionDao(),

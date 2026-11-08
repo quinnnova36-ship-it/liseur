@@ -43,8 +43,11 @@ import androidx.sqlite.execSQL
         GlossaryEntry::class,
         BookAiPreferences::class,
         BookMetadata::class,
+        com.chmouel.liseur.readora.discussion.DiscussionThread::class,
+        com.chmouel.liseur.readora.discussion.DiscussionMessage::class,
+        com.chmouel.liseur.readora.discussion.ModelConfig::class,
     ],
-    version = 71,
+    version = 72,
     exportSchema = true,
 )
 abstract class LiseurDatabase : RoomDatabase() {
@@ -83,8 +86,56 @@ abstract class LiseurDatabase : RoomDatabase() {
     abstract fun bookAiPreferencesDao(): BookAiPreferencesDao
     abstract fun glossaryDao(): GlossaryDao
     abstract fun bookMetadataDao(): BookMetadataDao
+    abstract fun discussionThreadDao(): com.chmouel.liseur.readora.discussion.DiscussionThreadDao
+    abstract fun discussionMessageDao(): com.chmouel.liseur.readora.discussion.DiscussionMessageDao
+    abstract fun modelConfigDao(): com.chmouel.liseur.readora.discussion.ModelConfigDao
 
     companion object {
+        val MIGRATION_71_72 = object : Migration(71, 72) {
+            override fun migrate(connection: SQLiteConnection) {
+                connection.execSQL(
+                    "CREATE TABLE IF NOT EXISTS `discussion_threads` (" +
+                        "`id` TEXT NOT NULL, `book_id` TEXT NOT NULL, `annotation_id` TEXT NOT NULL, " +
+                        "`created_at` INTEGER NOT NULL, `updated_at` INTEGER NOT NULL, " +
+                        "PRIMARY KEY(`id`), " +
+                        "FOREIGN KEY(`annotation_id`) REFERENCES `annotations`(`id`) " +
+                        "ON UPDATE NO ACTION ON DELETE CASCADE )",
+                )
+                connection.execSQL(
+                    "CREATE UNIQUE INDEX IF NOT EXISTS `index_discussion_threads_annotation_id` " +
+                        "ON `discussion_threads` (`annotation_id`)",
+                )
+                connection.execSQL(
+                    "CREATE INDEX IF NOT EXISTS `index_discussion_threads_book_id` " +
+                        "ON `discussion_threads` (`book_id`)",
+                )
+                connection.execSQL(
+                    "CREATE TABLE IF NOT EXISTS `discussion_messages` (" +
+                        "`id` TEXT NOT NULL, `thread_id` TEXT NOT NULL, `role` TEXT NOT NULL, " +
+                        "`content` TEXT NOT NULL, `status` TEXT NOT NULL, " +
+                        "`model_config_id` TEXT, `model_id_snapshot` TEXT, `context_snapshot` TEXT, " +
+                        "`created_at` INTEGER NOT NULL, PRIMARY KEY(`id`), " +
+                        "FOREIGN KEY(`thread_id`) REFERENCES `discussion_threads`(`id`) " +
+                        "ON UPDATE NO ACTION ON DELETE CASCADE )",
+                )
+                connection.execSQL(
+                    "CREATE INDEX IF NOT EXISTS `index_discussion_messages_thread_id` " +
+                        "ON `discussion_messages` (`thread_id`)",
+                )
+                connection.execSQL(
+                    "CREATE INDEX IF NOT EXISTS `index_discussion_messages_thread_id_created_at` " +
+                        "ON `discussion_messages` (`thread_id`, `created_at`)",
+                )
+                connection.execSQL(
+                    "CREATE TABLE IF NOT EXISTS `model_configs` (" +
+                        "`id` TEXT NOT NULL, `label` TEXT NOT NULL, `base_url` TEXT NOT NULL, " +
+                        "`model_id` TEXT NOT NULL, `key_alias` TEXT, " +
+                        "`is_default` INTEGER NOT NULL, `created_at` INTEGER NOT NULL, " +
+                        "PRIMARY KEY(`id`))",
+                )
+            }
+        }
+
         val MIGRATION_70_71 = object : Migration(70, 71) {
             override fun migrate(connection: SQLiteConnection) {
                 connection.execSQL(
@@ -2003,6 +2054,7 @@ abstract class LiseurDatabase : RoomDatabase() {
             MIGRATION_68_69,
             MIGRATION_69_70,
             MIGRATION_70_71,
+            MIGRATION_71_72,
         )
     }
 }

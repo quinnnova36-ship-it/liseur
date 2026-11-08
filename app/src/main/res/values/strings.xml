@@ -2,6 +2,9 @@
     <string name="reader_sync_furthest_known">Furthest read</string>
     <string name="reader_sync_take_furthest">Go to furthest</string>
     <string name="app_name" translatable="false">Readora</string>
+    <string name="readora_models_title">Discussion models</string>
+    <string name="readora_models_detail">Ask about a passage with your own OpenAI-compatible service</string>
+    <string name="discussion_action">Discuss this passage</string>
 
     <string name="sort_recent">Recent</string>
     <string name="sort_title">Title</string>

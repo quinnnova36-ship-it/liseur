@@ -86,6 +86,7 @@ import com.chmouel.liseur.domain.seriesIdForExtras
 import com.chmouel.liseur.domain.DictionaryUrl
 import com.chmouel.liseur.domain.exportNotebookMarkdown
 import com.chmouel.liseur.readora.anchor.AnchorMerge
+import com.chmouel.liseur.readora.discussion.DiscussionRepository
 import com.chmouel.liseur.reader.annotations.SelectionActionLayout
 import com.chmouel.liseur.reader.annotations.HighlightPalette
 import com.chmouel.liseur.reader.annotations.HighlightTint
@@ -185,8 +186,9 @@ class ReaderViewModel(
     private val openBookHandles: OpenBookHandles = OpenBookHandles(),
     val readAloud: ReadAloudFeature = ReadAloudFeature.None,
     private val pausedListening: PausedListening? = null,
+    /** Readora S3: the marked-passage discussion store, null where a build has none. */
+    private val discussion: DiscussionRepository? = null,
 ) : ViewModel() {
-
     /**
      * The fonts the reader has imported, for the navigator to declare.
      *
@@ -3232,6 +3234,7 @@ class ReaderViewModel(
                     openBookHandles = container.openBookHandles,
                     readAloud = container.readAloud,
                     pausedListening = container.pausedListening,
+                    discussion = container.discussions,
                 )
             }
         }

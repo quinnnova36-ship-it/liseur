@@ -97,6 +97,10 @@ import com.chmouel.liseur.data.settings.AppSettings
 import com.chmouel.liseur.data.settings.ReaderPrefs
 import com.chmouel.liseur.ui.theme.LiseurTheme
 import com.chmouel.liseur.ui.theme.SystemBarIcons
+import androidx.compose.material.icons.Icons
+import androidx.compose.material3.Icon
+import androidx.compose.material.icons.outlined.SmartToy
+import com.chmouel.liseur.ui.settings.ConnectionRow
 import com.chmouel.liseur.ui.theme.dynamicColorAvailable
 import com.chmouel.liseur.ui.theme.isDark
 import android.net.Uri
@@ -543,8 +547,18 @@ private fun LiseurApp(
                             // companion and their key screens are hidden for the
                             // AI-coding-reader cut. The screens themselves stay;
                             // S3 replaces them with the discussion drawer.
-                            showIntelligence = false,
-                            intelligenceRows = {},
+                            showIntelligence = true,
+                            // Readora S3: the Intelligence group now holds the
+                            // discussion models; the read-aloud/translation rows
+                            // stay out of the product.
+                            intelligenceRows = {
+                                com.chmouel.liseur.ui.settings.ConnectionRow(
+                                    icon = { Icon(Icons.Outlined.SmartToy, contentDescription = null) },
+                                    title = stringResource(R.string.readora_models_title),
+                                    subtitle = stringResource(R.string.readora_models_detail),
+                                    onClick = { openPage(Route.ReadoraModels) },
+                                )
+                            },
                         )
                     }
 
@@ -723,6 +737,12 @@ private fun LiseurApp(
 
                     Route.Licences -> {
                         LicencesScreen(onBack = back)
+                    }
+
+                    Route.ReadoraModels -> {
+                        com.chmouel.liseur.readora.discussion.ModelConfigScreen(
+                            onBack = back,
+                        )
                     }
                 }
             }

@@ -88,6 +88,8 @@ class SelectionActions(
     val onReadAloud: (() -> Unit)? = null,
     /** Describes the selected character from the chapters before this one. */
     val onCompanion: (() -> Unit)? = null,
+    /** Opens the discussion sheet anchored to this passage (Readora). */
+    val onDiscuss: (() -> Unit)? = null,
     /** False while the page shows a translation, whose words a highlight or note could not keep. */
     val annotate: Boolean = true,
 )
@@ -319,6 +321,7 @@ private fun ActionButtons(
             SelectionAction.NOTE -> actions.onNote.takeIf { actions.annotate }
             SelectionAction.LOOK_UP -> actions.onLookUp.takeIf { lookUp }
             SelectionAction.COMPANION -> actions.onCompanion
+            SelectionAction.DISCUSS -> actions.onDiscuss
             SelectionAction.SEARCH -> actions.onSearch
             SelectionAction.DELETE -> actions.onDelete
             SelectionAction.TRANSLATE -> actions.onTranslate
@@ -409,6 +412,7 @@ internal val SelectionAction.label: Int get() = when (this) {
     SelectionAction.NOTE -> R.string.annotation_note
     SelectionAction.LOOK_UP -> R.string.annotation_look_up
     SelectionAction.COMPANION -> R.string.companion_action
+    SelectionAction.DISCUSS -> R.string.discussion_action
     SelectionAction.SEARCH -> R.string.reader_search
     SelectionAction.DELETE -> R.string.annotation_delete
     SelectionAction.TRANSLATE -> R.string.translation_action

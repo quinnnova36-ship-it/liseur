@@ -16,6 +16,9 @@
     <string name="add_book">Добавить книгу</string>
     <string name="add_folder">Добавить папку</string>
     <string name="add_books">Добавить книги</string>
+    <string name="readora_models_title">Модели обсуждения</string>
+    <string name="readora_models_detail">Обсудить отрывок через свой сервис, совместимый с OpenAI</string>
+    <string name="discussion_action">Обсудить отрывок</string>
     <string name="add_folder_hint">Выберите папку с EPUB. Liseur будет добавлять новые книги, которые в ней появятся.</string>
     <string name="library_folders">Отслеживаемые папки</string>
     <string name="library_folders_empty">Ни одна папка не отслеживается.</string>

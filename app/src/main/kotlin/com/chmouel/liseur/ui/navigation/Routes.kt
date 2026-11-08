@@ -32,6 +32,7 @@ sealed interface Route {
     data object Licences : Route
     data object About : Route
     data object Stats : Route
+    data object ReadoraModels : Route
     data class BookStats(val bookUrl: String, val title: String) : Route
     data class BookDetails(val bookUrl: String) : Route
 }
@@ -60,6 +61,7 @@ private val Route.tag: String
         Route.Licences -> "Licences"
         Route.About -> "About"
         Route.Stats -> "Stats"
+        Route.ReadoraModels -> "ReadoraModels"
         is Route.BookStats -> "BookStats"
         is Route.BookDetails -> "BookDetails"
     }
@@ -68,7 +70,7 @@ private val objectRoutes: Map<String, Route> = listOf(
     Route.Library, Route.Settings, Route.SettingsBackup, Route.ReadingAppearance, Route.SelectionToolbar,
     Route.ReadingNavigation, Route.PageTaps, Route.ReadAloud, Route.Translation, Route.ReadingCompanion, Route.Services,
     Route.WatchedFolders, Route.HiddenBooks, Route.ServerAccount, Route.BrowseLibraries, Route.Licences,
-    Route.About, Route.Stats,
+    Route.About, Route.Stats, Route.ReadoraModels,
 ).associateBy { it.tag }
 
 /**
@@ -135,7 +137,7 @@ val Route.isSettingsPage: Boolean
     get() = when (this) {
         Route.ReadingAppearance, Route.SelectionToolbar, Route.ReadingNavigation, Route.PageTaps, Route.ReadAloud,
         Route.Translation, Route.ReadingCompanion, Route.Services, Route.SettingsBackup,
-        Route.WatchedFolders, Route.HiddenBooks, Route.About, Route.ServerAccount,
+        Route.WatchedFolders, Route.HiddenBooks, Route.About, Route.ServerAccount, Route.ReadoraModels,
         -> true
         else -> false
     }

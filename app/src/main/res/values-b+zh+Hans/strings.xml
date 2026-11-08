@@ -137,6 +137,9 @@
     <string name="add_book">添加图书</string>
     <string name="add_folder">添加文件夹</string>
     <string name="add_books">添加图书</string>
+    <string name="readora_models_title">讨论模型</string>
+    <string name="readora_models_detail">用你自己的 OpenAI 兼容服务讨论划线内容</string>
+    <string name="discussion_action">讨论这段</string>
     <string name="add_folder_hint">选择一个存放 EPUB 的文件夹。Liseur 会添加其中新出现的图书。</string>
     <string name="library_folders">监视文件夹</string>
     <string name="library_folders_empty">没有正在监视的文件夹。</string>

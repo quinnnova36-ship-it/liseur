@@ -14,6 +14,9 @@
     <string name="add_book">Aggiungi un libro</string>
     <string name="add_folder">Aggiungi una cartella</string>
     <string name="add_books">Aggiungi libri</string>
+    <string name="readora_models_title">Modelli di discussione</string>
+    <string name="readora_models_detail">Discuti un brano con il tuo servizio compatibile OpenAI</string>
+    <string name="discussion_action">Discuti questo brano</string>
     <string name="add_folder_hint">Scegli una cartella di EPUB. Liseur aggiunge i nuovi libri che vi compaiono.</string>
     <string name="library_folders">Cartelle osservate</string>
     <string name="library_folders_empty">Nessuna cartella è in osservazione.</string>

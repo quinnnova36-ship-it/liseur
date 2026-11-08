@@ -10,7 +10,9 @@ enum class SelectionAction(
     val defaultStyle: SelectionActionStyle = SelectionActionStyle.ICON,
 ) {
     NOTE("note", SelectionActionIcon.NOTE), LOOK_UP("look_up", SelectionActionIcon.BOOK),
-    COMPANION("companion", SelectionActionIcon.COMPANION), SEARCH("search", SelectionActionIcon.SEARCH),
+    DISCUSS("discuss", SelectionActionIcon.COMPANION, SelectionActionStyle.BOTH),
+    COMPANION("companion", SelectionActionIcon.COMPANION, SelectionActionStyle.HIDDEN),
+    SEARCH("search", SelectionActionIcon.SEARCH),
     DELETE("delete", SelectionActionIcon.DELETE), TRANSLATE("translate", SelectionActionIcon.TRANSLATE),
     READ_ALOUD("read_aloud", SelectionActionIcon.READ_ALOUD), SHARE("share", SelectionActionIcon.SHARE),
     COPY("copy", SelectionActionIcon.COPY, SelectionActionStyle.HIDDEN),

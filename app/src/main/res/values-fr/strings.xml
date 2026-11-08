@@ -14,6 +14,9 @@
     <string name="add_book">Ajouter un livre</string>
     <string name="add_folder">Ajouter un dossier</string>
     <string name="add_books">Ajouter des livres</string>
+    <string name="readora_models_title">Modèles de discussion</string>
+    <string name="readora_models_detail">Discuter un passage avec votre propre service compatible OpenAI</string>
+    <string name="discussion_action">Discuter ce passage</string>
     <string name="add_folder_hint">Choisissez un dossier d\'EPUB. Liseur ajoute les nouveaux livres qui y apparaissent.</string>
     <string name="library_folders">Dossiers surveillés</string>
     <string name="library_folders_empty">Aucun dossier n\'est surveillé.</string>
